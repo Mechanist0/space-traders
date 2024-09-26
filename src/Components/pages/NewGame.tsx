@@ -17,7 +17,7 @@ function NewGame() {
       }),
     };
 
-    try {
+    const fetchRepos = async () => {
       const response = await fetch("https://api.spacetraders.io/v2/register", options);
       const data = await response.json();
       setGameInfo(data);
@@ -26,6 +26,10 @@ function NewGame() {
       console.error("Error registering agent:", err);
     }
   };
+
+  useEffect(() => {
+    fetchRepos();
+  }, []);
 
   return (
     <div>
