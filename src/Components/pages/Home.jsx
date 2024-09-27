@@ -1,5 +1,5 @@
 import React from "react";
-import NewGame from "./NewGame.tsx";
+import NewGame from "./NewGame";
 
 function Home() {
   return (
