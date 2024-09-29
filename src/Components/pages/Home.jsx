@@ -1,10 +1,10 @@
 import React from "react";
-import NewGame from "./NewGame";
 
 function Home() {
   return (
     <div>
-      <NewGame></NewGame>
+      <h1> Welcome to Eros (Name subject to change) </h1>
+      <a href={"/newgame"}>New Game</a>
     </div>
   );
 }

@@ -28,7 +28,7 @@ function NewGame() {
           console.log("API Response:", data);
           if (data.error) {
             const errorMessage = data.error.message.includes(
-              "Cannot register agent"
+              "Cannot register agent",
             )
               ? `Cannot register agent. Agent symbol ${symbol} has already been claimed.`
               : "An error occurred while fetching the data. Please try again.";
@@ -41,7 +41,7 @@ function NewGame() {
         .catch((error) => {
           console.error("Error fetching data:", error);
           setError(
-            "An error occurred while fetching the data. Please try again."
+            "An error occurred while fetching the data. Please try again.",
           );
         });
     }
