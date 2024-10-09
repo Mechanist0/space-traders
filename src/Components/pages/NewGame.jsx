@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./styling/NewGame.css";
 import ErrorPopup from "./ErrorPopup";
 import AgentDetails from "./AgentDetails";
-import ContractDetails from "./ContractDetails";
+import ContractDetails from "./Contracts/ContractDetails";
 
 function NewGame() {
   const [symbol, setSymbol] = useState("");
@@ -66,7 +67,6 @@ function NewGame() {
       <h1>SAVE THE TOKEN</h1>
 
       {error && <ErrorPopup message={error} onClose={() => setError(null)} />}
-
       {info && info.data ? (
         <div key={info.data.token}>
           <button
@@ -81,8 +81,10 @@ function NewGame() {
           >
             Save Token
           </button>
-
           {info.data.agent && <AgentDetails agent={info.data.agent} />}
+          <Link to="/landing" state={info}>
+            Landing Page
+          </Link>
           {info.data.contract && (
             <ContractDetails contract={info.data.contract} />
           )}
