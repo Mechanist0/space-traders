@@ -1,0 +1,10 @@
+.moneypanel {
+    height: 9%; /* Full viewport height */
+    position: fixed; /* Fix the sidebar to the left side */
+    top: 2%;
+    right: 10px;
+    padding-top: 2px; /* Add space on top */
+    background-color: #212529; /* Light gray background */
+    width: 250px; /* Sidebar width */
+    border-radius: 10px;
+}
