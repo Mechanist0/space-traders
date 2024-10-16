@@ -1,14 +1,9 @@
 body {
-    background: linear-gradient(180deg, #001f3f, #004080);
+    background: #001f3f;
     color: #ffffff;
     font-family: "Arial", sans-serif;
     margin: 0;
     padding: 0;
-}
-
-div {
-    text-align: center;
-    padding: 20px;
 }
 
 input {

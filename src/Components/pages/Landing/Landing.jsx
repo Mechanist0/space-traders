@@ -1,25 +1,32 @@
 import React from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import NavSidebar from "./NavSidebar";
 import Panel from "./Panel";
 import ReputationMoney from "./ReputationMoney";
 import { useEffect } from "react";
 
 function Landing() {
-  let agent = useLocation().state;
+  let state = useLocation().state;
 
+  const navigate = useNavigate();
   useEffect(() => {
-    console.log(agent.data.agent.credits);
-  }, [agent]);
+    if (state === null || state === undefined) {
+      navigate("/login");
+    }
+  });
 
   return (
     <div>
-      <NavSidebar state={agent} />
-      <main class="main-content col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <h1>Welcome to Space Traders!</h1>
-      </main>
-      <ReputationMoney state={agent} />
-      <Panel state={agent} />
+      {state && (
+        <div>
+          <NavSidebar state={state} />
+          <main className="main-content col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <h1>Welcome to Space Traders!</h1>
+          </main>
+          <ReputationMoney state={state} />
+          <Panel state={state} />
+        </div>
+      )}
     </div>
   );
 }

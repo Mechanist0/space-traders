@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router";
-import "./Styling/Panel.css";
+import "../Styling/Panel.css";
 
 const Panel = () => {
-  let agent = useLocation().state;
+  let state = useLocation().state;
 
   return (
     <div>

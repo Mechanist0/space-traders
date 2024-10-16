@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
-import "./Styling/Sidebar.css";
+import "../Styling/Sidebar.css";
 
 const NavSidebar = () => {
-  let agent = useLocation().state;
+  let state = useLocation().state;
 
   return (
     <div>
@@ -13,12 +13,12 @@ const NavSidebar = () => {
         <div className="position-sticky">
           <ul className="nav flex-column">
             <li className="nav-item">
-              <Link to="/landing" state={agent}>
+              <Link to="/landing" state={state}>
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/contracts" state={agent}>
+              <Link to="/contracts" state={state}>
                 Contracts
               </Link>
             </li>
