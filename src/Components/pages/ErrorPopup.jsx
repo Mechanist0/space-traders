@@ -1,5 +1,5 @@
 import React from "react";
-import "./styling/ErrorPopup.css";
+import "./Styling/ErrorPopup.css";
 
 const ErrorPopup = ({ message, onClose }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./styling/NewGame.css";
+import "./Styling/NewGame.css";
 import ErrorPopup from "./ErrorPopup";
 import AgentDetails from "./AgentDetails";
 import ContractDetails from "./Contracts/ContractDetails";
