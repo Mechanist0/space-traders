@@ -1,7 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import NavSidebar from "./NavSidebar";
-import Panel from "./Panel";
 import ReputationMoney from "./ReputationMoney";
 import { useEffect } from "react";
 
@@ -24,7 +23,6 @@ function Landing() {
             <h1>Welcome to Space Traders!</h1>
           </main>
           <ReputationMoney state={state} />
-          <Panel state={state} />
         </div>
       )}
     </div>

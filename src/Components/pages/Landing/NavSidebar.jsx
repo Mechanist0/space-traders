@@ -7,24 +7,29 @@ const NavSidebar = () => {
   let state = useLocation().state;
 
   return (
-    <div>
-      {/* Sidebar */}
-      <nav className="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
-        <div className="position-sticky">
-          <ul className="nav flex-column">
-            <li className="nav-item">
-              <Link to="/landing" state={state}>
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/contracts" state={state}>
-                Contracts
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <div className="container-fluid">
+      <div className="row">
+        <nav className="col-12 col-sm-4 col-md-3 col-lg-2 bg-dark sidebar vh-100">
+          <div className="position-sticky">
+            <ul className="nav flex-column">
+              <li className="nav-item">
+                <Link to="/" state={state} className="nav-link text-light">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/contracts"
+                  state={state}
+                  className="nav-link text-light"
+                >
+                  Contracts
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 };
