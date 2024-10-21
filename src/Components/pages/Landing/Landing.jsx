@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import NavSidebar from "./NavSidebar";
-import Panel from "./Panel";
-import ReputationMoney from "./ReputationMoney";
 import { useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
+import ReputationMoney from "./ReputationMoney";
 
 function Landing() {
   let state = useLocation().state;
@@ -18,41 +18,56 @@ function Landing() {
   return (
     <div>
       {state && (
-        <div>
-          <NavSidebar state={state} />
-          <main className="main-content col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h1>Welcome to Space Traders!</h1>
-          </main>
-          <ReputationMoney state={state} />
-          <Panel state={state} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            height: "100vh",
+            maxHeight: "100vh",
+          }}
+        >
+          {/* Sidebar */}
+          <Col style={{ width: "100px" }} className="bg-dark p-3">
+            <NavSidebar state={state} />
+          </Col>
+
+          {/* Ships */}
+          <Col
+            style={{ width: "100px", flexDirection: "column" }}
+            className="bg-dark p-3 text-white justify-content-center"
+          >
+            <h2>Ships</h2>
+          </Col>
+
+          {/* Main Content */}
+          <Col style={{ flexGrow: 10 }}>
+            <main className="ps-5">
+              <h1>Welcome to Space Traders!</h1>
+            </main>
+          </Col>
+
+          {/* Ship and Agent Details */}
+          <Col
+            style={{ flexGrow: 3, flexDirection: "column" }}
+            className="d-flex bg-dark text-white"
+          >
+            <Row>
+              <h2 className="p-2 d-flex justify-content-center">
+                Player Details
+              </h2>
+              <ReputationMoney />
+            </Row>
+            <Row>
+              <h2 className="p-2 d-flex justify-content-center">
+                Agent Details
+              </h2>
+            </Row>
+          </Col>
         </div>
       )}
     </div>
   );
 }
-
-// const Landing = () => {
-//   let agent = useLocation().state;
-//   return (
-//     // Divide page into 3 sections
-//     <div className="container-fluid">
-//       <div className="col">
-//         {/* Sidebar */}
-//         <NavSidebar state={agent} />
-
-//         {/* Main content */}
-//         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-//           <h1>Welcome to Space Traders!</h1>
-//         </main>
-
-//         {/* Top Right Info Panel */}
-//         <ReputationMoney state={agent} />
-
-//         {/* Middle Right Panel */}
-//         <Panel state={agent} />
-//       </div>
-//     </div>
-//   );
-// };
 
 export default Landing;

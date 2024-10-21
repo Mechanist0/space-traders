@@ -1,14 +1,13 @@
 import React from "react";
-import { useLocation } from "react-router";
-import "../Styling/Panel.css";
+//import { useLocation } from "react-router";
 
 const Panel = () => {
-  let state = useLocation().state;
+  //let state = useLocation().state;
 
   return (
     <div>
       {/* Right Panel */}
-      <div className="panel">
+      <div>
         <h2>Agent Details</h2>
       </div>
     </div>

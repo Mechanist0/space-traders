@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation } from "react-router";
-import "../Styling/ReputationMoney.css";
 import { request } from "../../../Functions/Api";
 import { useState, useEffect } from "react";
 
@@ -21,7 +20,7 @@ const ReputationMoney = () => {
   return (
     <div>
       {/* Top Right Info Panel */}
-      <div className="moneypanel">
+      <div className="d-flex justify-content-center">
         <h5>
           Credits: {details.credits} . Ships: {details.shipCount}
         </h5>
