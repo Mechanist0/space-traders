@@ -1,12 +1,15 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import NavSidebar from "./NavSidebar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import ReputationMoney from "./ReputationMoney";
+import Ships from "../Ships/Ships";
+import ShipDetails from "../Ships/ShipDetails";
 
 function Landing() {
   let state = useLocation().state;
+  let [ship, setShip] = useState("");
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -14,6 +17,10 @@ function Landing() {
       navigate("/login");
     }
   });
+
+  const handleShipButton = (ship) => {
+    setShip(ship);
+  };
 
   return (
     <div>
@@ -28,28 +35,35 @@ function Landing() {
           }}
         >
           {/* Sidebar */}
-          <Col style={{ width: "100px" }} className="bg-dark p-3">
+          <Col style={{ flexGrow: 1 }} className="bg-dark p-3">
+            <h5 className="d-flex justify-content-center text-white">
+              Space Traders
+            </h5>
             <NavSidebar state={state} />
           </Col>
 
+          <div class="vr"></div>
+
           {/* Ships */}
           <Col
-            style={{ width: "100px", flexDirection: "column" }}
+            style={{ flexGrow: 1, flexDirection: "column" }}
             className="bg-dark p-3 text-white justify-content-center"
           >
             <h2>Ships</h2>
+            <Ships state={state} shipButtonInfo={handleShipButton} />
           </Col>
 
           {/* Main Content */}
-          <Col style={{ flexGrow: 10 }}>
+          <Col style={{ flexGrow: 5 }}>
             <main className="ps-5">
               <h1>Welcome to Space Traders!</h1>
+              {ship && <ShipDetails ship={ship} />}
             </main>
           </Col>
 
           {/* Ship and Agent Details */}
           <Col
-            style={{ flexGrow: 3, flexDirection: "column" }}
+            style={{ flexGrow: 2, flexDirection: "column" }}
             className="d-flex bg-dark text-white"
           >
             <Row>
