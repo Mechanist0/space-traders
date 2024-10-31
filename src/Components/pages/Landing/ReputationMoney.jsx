@@ -21,9 +21,7 @@ const ReputationMoney = () => {
     <div>
       {/* Top Right Info Panel */}
       <div className="d-flex justify-content-center">
-        <h5>
-          Credits: {details.credits} . Ships: {details.shipCount}
-        </h5>
+        <h5>{details && details === "" ? "Loading..." : details.username}</h5>
       </div>
     </div>
   );

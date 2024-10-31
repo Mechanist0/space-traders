@@ -31,18 +31,18 @@ const Ships = ({ shipButtonInfo }) => {
 
           {details.map((ship, index) => (
             <button key={index} onClick={() => shipButtonInfo(ship)}>
-              <div style={{ flexGrow: 3, flexDirection: "column" }}>
+              <div
+                style={{
+                  flexGrow: 3,
+                  flexDirection: "column",
+                  alignContent: "start",
+                }}
+              >
                 <hr />
                 <div>{ship.registration.name}</div>
                 <div>{ship.registration.role}</div>
                 <div>{ship.nav.systemSymbol}</div>
-                <div>{formatDate(ship.nav.route.departureTime)}</div>
-                <div>{formatDate(ship.nav.route.arrival)}</div>
                 <div>{ship.nav.status}</div>
-                <div>
-                  {ship.cooldown.remainingSeconds &&
-                    ship.cooldown.remainingSeconds > 0}
-                </div>
               </div>
             </button>
           ))}
