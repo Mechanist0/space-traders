@@ -11,7 +11,6 @@ const formatDate = (dateString) => {
 const Ships = ({ shipButtonInfo }) => {
   const [details, setDetails] = useState("");
   let state = useLocation().state;
-
   useEffect(() => {
     request({
       accessToken: state.accessToken,
@@ -24,7 +23,6 @@ const Ships = ({ shipButtonInfo }) => {
 
   return (
     <div>
-      Test
       {details && details.length > 0 && (
         <div style={{ flexGrow: 3, flexDirection: "column" }}>
           {/* Run through all ships */}

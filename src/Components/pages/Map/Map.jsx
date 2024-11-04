@@ -1,25 +1,43 @@
 import React from "react";
-import ContractDetails from "./ContractDetails";
-import { useLocation } from "react-router";
-import NavSidebar from "../Landing/NavSidebar";
-import ReputationMoney from "../Landing/ReputationMoney";
-import { useState, useEffect } from "react";
-import { request } from "../../../Functions/Api";
 import { Col, Row } from "react-bootstrap";
+import NavSidebar from "../Landing/NavSidebar";
+import { useEffect, useState } from "react";
+import ReputationMoney from "../Landing/ReputationMoney";
+import { useLocation } from "react-router";
+import { Stage, Layer, Circle, Text } from "react-konva";
+import { request } from "../../../Functions/Api";
+import { useParams } from "react-router";
+import Ships from "../Ships/Ships";
 
-const Contracts = () => {
+function generateStellarObject(x, y, name) {
+  return (
+    <Circle x={x} y={y} radius={20} fill="#89b717" opacity={0.8} draggable />
+  );
+}
+
+// Get all the stellar objects from the server
+// and generate them on the map
+
+function stellarObjectParser(stellarObjectsJSON) {
+  console.log(stellarObjectsJSON);
+}
+
+const Map = () => {
+  const [stellarObjects, setStellarObjects] = useState([]);
+  let [ship, setShip] = useState("");
   let state = useLocation().state;
-  let [contracts, setContracts] = useState({});
 
-  useEffect(() => {
+  const handleShipButton = (ship) => {
+    console.log("Updating ship...\n Ship:" + ship);
+    setShip(ship);
     request({
       accessToken: state.accessToken,
-      endpoint: "/my/contracts",
+      endpoint: "/systems/" + ship.nav.systemSymbol,
     })
       .then((response) => response.json())
-      .then((json) => setContracts(json.data))
+      .then((json) => setStellarObjects(json.data))
       .catch((err) => console.log(err));
-  }, [state.accessToken]);
+  };
 
   return (
     <div>
@@ -43,10 +61,25 @@ const Contracts = () => {
 
           <div class="vr"></div>
 
+          {/* Ships */}
+          <Col
+            style={{ flexGrow: 1, flexDirection: "column" }}
+            className="bg-dark p-3 text-white justify-content-center"
+          >
+            <h2>Ships</h2>
+            <Ships state={state} shipButtonInfo={handleShipButton} />
+          </Col>
+
           {/* Main Content */}
           <Col style={{ flexGrow: 5 }}>
-            {contracts[0] && <ContractDetails contract={contracts[0]} />}
-            {console.log(contracts)}
+            <main className="ps-5">
+              <h1>Welcome to Space Traders!</h1>
+              <h2>Map</h2>
+              {stellarObjectParser(stellarObjects)}
+              <Stage width={window.innerWidth} height={window.innerHeight}>
+                <Layer>{stellarObjects.at(0)}</Layer>
+              </Stage>
+            </main>
           </Col>
 
           {/* Ship and Agent Details */}
@@ -72,4 +105,4 @@ const Contracts = () => {
   );
 };
 
-export default Contracts;
+export default Map;

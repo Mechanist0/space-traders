@@ -19,7 +19,11 @@ const NavSidebar = () => {
             Contracts
           </Link>
         </li>
-        <li className="nav-item">Log Out</li>
+        <li>
+          <Link to="/map" state={state}>
+            Map
+          </Link>
+        </li>
       </ul>
     </nav>
   );

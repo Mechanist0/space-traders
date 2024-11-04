@@ -57,7 +57,7 @@ function Landing() {
           <Col style={{ flexGrow: 5 }}>
             <main className="ps-5">
               <h1>Welcome to Space Traders!</h1>
-              {ship && <ShipDetails ship={ship} />}
+              {ship && <ShipDetails state={state} ship={ship} />}
             </main>
           </Col>
 
