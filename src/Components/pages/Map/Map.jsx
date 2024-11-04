@@ -1,42 +1,56 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import NavSidebar from "../Landing/NavSidebar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReputationMoney from "../Landing/ReputationMoney";
 import { useLocation } from "react-router";
 import { Stage, Layer, Circle, Text } from "react-konva";
 import { request } from "../../../Functions/Api";
-import { useParams } from "react-router";
 import Ships from "../Ships/Ships";
 
 function generateStellarObject(x, y, name) {
-  return (
-    <Circle x={x} y={y} radius={20} fill="#89b717" opacity={0.8} draggable />
-  );
+  return <></>;
 }
 
 // Get all the stellar objects from the server
 // and generate them on the map
 
 function stellarObjectParser(stellarObjectsJSON) {
-  console.log(stellarObjectsJSON);
+  var objects = [];
+  if (stellarObjectsJSON.waypoints) {
+    for (var i = 0; i < stellarObjectsJSON.waypoints.length; i++) {
+      objects.push({
+        x: stellarObjectsJSON.waypoints[i].x + window.innerWidth / 2,
+        y: stellarObjectsJSON.waypoints[i].y + window.innerHeight / 2,
+        radius: 5,
+        fill: "red",
+      });
+    }
+  }
+  return objects;
 }
 
 const Map = () => {
+  const [stellarObjectsJSON, setStellarObjectsJSON] = useState([]);
   const [stellarObjects, setStellarObjects] = useState([]);
   let [ship, setShip] = useState("");
   let state = useLocation().state;
 
   const handleShipButton = (ship) => {
-    console.log("Updating ship...\n Ship:" + ship);
     setShip(ship);
-    request({
-      accessToken: state.accessToken,
-      endpoint: "/systems/" + ship.nav.systemSymbol,
-    })
-      .then((response) => response.json())
-      .then((json) => setStellarObjects(json.data))
-      .catch((err) => console.log(err));
+    if (ship) {
+      request({
+        accessToken: state.accessToken,
+        endpoint: "/systems/" + ship.nav.systemSymbol,
+      })
+        .then((response) => response.json())
+        .then((json) => setStellarObjectsJSON(json.data))
+        .catch((err) => console.log(err));
+    }
+    if (stellarObjectsJSON) {
+      console.log(stellarObjectsJSON);
+      setStellarObjects(stellarObjectParser(stellarObjectsJSON));
+    }
   };
 
   return (
@@ -75,9 +89,14 @@ const Map = () => {
             <main className="ps-5">
               <h1>Welcome to Space Traders!</h1>
               <h2>Map</h2>
-              {stellarObjectParser(stellarObjects)}
               <Stage width={window.innerWidth} height={window.innerHeight}>
-                <Layer>{stellarObjects.at(0)}</Layer>
+                <Layer>
+                  {stellarObjects &&
+                    stellarObjects.length > 0 &&
+                    stellarObjects.map((circle, index) => (
+                      <Circle key={index} {...circle} />
+                    ))}
+                </Layer>
               </Stage>
             </main>
           </Col>
